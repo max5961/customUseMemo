@@ -67,7 +67,6 @@ function useCustomMemo<T, K>(cb: () => T, deps: K[]): T {
     const newVal: T = cb();
 
     setMemoState({
-        ...memoState,
         deps: deps,
         val: newVal,
         isFirstRender: false,
