@@ -40,10 +40,11 @@ interface MemoState<T, K> {
 }
 
 function useCustomMemo<T, K>(cb: () => T, deps: K[]): T {
-    /* You cannot use the callback function to generate the computed value here.
-     * useState is a function just like any other and therefore it is still
-     * called every time this hook runs, which defeats the purpose of the hook.
-     * While that might seem obvious, it wasn't my first thought */
+    /* useState is a function just like any other which means it is still
+     * called every time this hook runs.  Therefore, using the cb to assign val
+     * in the useState argument would execute the cb on every re-render and
+     * defeat the purpose of the hook. While that might seem obvious, it wasn't
+     * my first thought */
     const [memoState, setMemoState] = useState<MemoState<T, K>>({
         deps: deps,
         val: null,
